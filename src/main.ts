@@ -31,7 +31,7 @@ export class main
     // Кнопка скачать в верхней части музыки
     let btn_dwnl = document.createElement("div");
     btn_dwnl.textContent = 'Download all doc';
-    btn_dwnl.addEventListener("click", function ()
+    btn_dwnl.addEventListener("click", async function ()
     {
         console.log("btn_dwnl click");
         // const playlistContainer = window.unsafeWindow.audioPlaylistLayerWrap.querySelector<HTMLDivElement>("._audio_pl")
@@ -45,6 +45,33 @@ export class main
         //     Queue.add(reloaded, 'idle');
         //     Queue.start()
         // })
+
+
+        const response = await fetch("https://vk.com/al_wall.php?act=get_wall", {
+          method: 'POST',
+          body: new URLSearchParams({
+            act: 'get_wall',
+            al: '1',
+            fixed: '',
+            offset: '10',
+            onlyCache: 'false',
+            owner_id: '486758265',
+            type: 'own'
+          }),
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
+          },});
+        
+        // If you care about a response:
+        if (response.body !== null) {
+          // body is ReadableStream<Uint8Array>
+          // parse as needed, e.g. reading directly, or
+          //const asString = new TextDecoder("utf-8").decode(response.body as BufferSource);
+          // and further:
+          let responceText: string = await response.text();
+          const asJSON = JSON.parse(responceText);  // implicitly 'any', make sure to verify type on runtime.
+          console.log(`response: {asJSON}`);
+        }
     })
     btn_dwnl.className = 'FlatButton FlatButton--primary FlatButton--size-m';
     //let el = (<HTMLDivElement>mutation.addedNodes[0]).querySelector<HTMLDivElement>('.ui_actions_menu._ui_menu')

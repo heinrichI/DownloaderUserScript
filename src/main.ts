@@ -1,4 +1,5 @@
 //import { SettingsModel } from "./settingsModel";
+import { MessageService } from "./MessageService";
 
 export class main
 {
@@ -69,8 +70,31 @@ export class main
           //const asString = new TextDecoder("utf-8").decode(response.body as BufferSource);
           // and further:
           let responceText: string = await response.text();
-          const asJSON = JSON.parse(responceText);  // implicitly 'any', make sure to verify type on runtime.
-          console.log(`response: {asJSON}`);
+          //const asJSON = JSON.parse(responceText);  // implicitly 'any', make sure to verify type on runtime.
+          console.log(`response: ${responceText}`);
+        }
+
+        MessageService.show();
+
+        var x=window.open();
+        if (x != null)
+        {
+          //x.document.open().write('<h1>Test</h1>');
+          //x.close();
+
+          //var win = window.open("", "Title", "toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=yes,width=780,height=200,top="+(screen.height-400)+",left="+(screen.width-840));
+          //win.document.body.innerHTML = "HTML";
+
+          const winHtml = `<!DOCTYPE html>
+              <html>
+                  <head>
+                      <title>Window with Blob</title>
+                  </head>
+                  <body>
+                      <h1>Hello from the new window!</h1>
+                  </body>
+              </html>`;
+          x.document.body.innerHTML = winHtml;
         }
     })
     btn_dwnl.className = 'FlatButton FlatButton--primary FlatButton--size-m';

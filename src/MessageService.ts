@@ -1,7 +1,8 @@
+import { IMessageService } from "./Interfaces";
 
-export class MessageService
+export class MessageService implements IMessageService
 {
-    static show() : string | null
+    Show() : string | null
     {  
      var promptValue = prompt('Download - 1\nOpen page - 2', '');  
      return promptValue

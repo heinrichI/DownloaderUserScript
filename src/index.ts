@@ -1,18 +1,23 @@
 // import { Buttons } from "./button";
 // import { Settings } from "./settings";
 // import { h } from "./utils";
-import { main}  from './main';
+import { Main }  from './main';
 import { DOMReady}  from './DOMReady';
 //export const settings = new Settings()
+import { MessageService }  from './MessageService';
 
-    
+
 DOMReady().then(function () 
 {
   console.log('DOMReady');
-  main.Run()
+
+  const messageService = new MessageService();
+
+  let main = new Main();
+  main.Run(messageService)
 })
 
-function app() 
+export function app() 
 {
   console.log(`DownloaderUserScript: ${location.hostname}`);
   //Logger.settingsModel = settingsModel
@@ -35,4 +40,4 @@ function app()
 //   logger.error(time(), 'app error', error)
 // })
 
-module.exports = app
+//module.exports = app
